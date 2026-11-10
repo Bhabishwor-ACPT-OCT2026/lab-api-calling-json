@@ -80,3 +80,14 @@ if __name__ == "__main__":
     except ValidationError as error:
         for detail in error.errors():
             print(f"- Field: {detail['loc']}, Error: {detail['msg']}")
+
+
+class ProductListing(BaseModel):
+    """Expected structured output from ChatGPT."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    title: str = Field(min_length=1)
+    description: str = Field(min_length=1)
+    features: list[str] = Field(min_length=5, max_length=7)
+    keywords: list[str] = Field(min_length=1)
